@@ -23,10 +23,13 @@ def publish_readings():
     client = PubSubClient()
 
     while True:
-        reading = random.uniform(0, 10)
-        print(f'> generated: {reading}')
+        try:
+            reading = random.uniform(0, 10)
+            print(f'> generated: {reading}')
 
-        led.blink(count=5, between=0.3)
-        client.publish(topic=publish_topic, message=str(reading))
+            led.blink(count=5, between=0.3)
+            client.publish(topic=publish_topic, message=str(reading))
 
-        sleep(10)
+            sleep(10)
+        except OSError as e:
+            pass

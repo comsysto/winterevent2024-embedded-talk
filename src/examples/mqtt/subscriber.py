@@ -33,5 +33,8 @@ def subscribe_on_readings():
     client.subscribe(topic=subscribe_topic, callback=callback)
 
     while True:
-        client.check_message()
-        sleep(1)
+        try:
+            client.check_message()
+            sleep(1)
+        except OSError as e:
+            client = PubSubClient()
