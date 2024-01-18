@@ -32,4 +32,4 @@ def publish_readings():
 
             sleep(10)
         except OSError as e:
-            pass
+            client = PubSubClient()
