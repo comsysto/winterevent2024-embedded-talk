@@ -1,4 +1,8 @@
-import ssd1306
+try:
+    # some esp chip doesn't support this library, but esp8266 does
+    import ssd1306
+except:
+    pass
 import framebuf
 
 from micropython import const
@@ -19,6 +23,9 @@ TEXT_COLOR = 1
 
 
 class Esp8266Display:
+    """
+    Docs: https://docs.micropython.org/en/latest/esp8266/tutorial/ssd1306.html
+    """
     _width: int
     _height: int
     _display: ssd1306.SSD1306_I2C
@@ -121,17 +128,17 @@ class Matrix8x8:
 
     def scrolling_message(self, message: str, invert_color: bool = False):
         fill_color = 1 if invert_color else 0
-        # clear display.
+        # clear display
         self.fill(fill_color)
         self.show()
-        # Calculate number of columns of the message
+        # calculate number of columns of the message
         column = (len(message) * 8)
         for x in range(32, -column, -1):
-            # Clear the display
+            # clear display
             self.fill(fill_color)
-            # Write the scrolling text in to frame buffer
+            # write the scrolling text in to frame buffer
             self.text(message, x, 1, abs(fill_color-1))
-            # Show the display
+            # show
             self.show()
-            # Set the Scrolling speed. Here it is 50ms.
+            # set the scrolling speed (50ms)
             sleep(0.05)

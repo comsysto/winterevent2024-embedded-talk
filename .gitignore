@@ -1,7 +1,7 @@
 # secrets
 .env
 src/common/secrets.py
-test.py
+test*.py
 venv
 **.DS_Store
 **.idea

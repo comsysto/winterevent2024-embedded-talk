@@ -1,7 +1,5 @@
 import json
 
-from time import sleep
-
 from src.common.display import Esp8266Display, Matrix8x8
 from src.common.input import MembraneKeypad3x1
 from src.common.sensors import DHT22
@@ -25,7 +23,7 @@ def keypad_message():
     keypad = MembraneKeypad3x1()
 
     display.message(f'use semaphore', duration_s=1.0)
-    display.message('in: <empty>')
+    display.message('in: <empty>', reset_after=False)
 
     readings: [] = keypad.wait_input(timeout_ms=5000, expected_input_count=3)
     if len(readings) != 0:
@@ -46,6 +44,14 @@ def temperature_message():
     display.message(f'hum: {sensor.humidity()}%', row=32, reset_before=False, duration_s=1.0)
 
     display.off()
+
+
+def temperature_console_message():
+    sensor = DHT22(pin=5)
+
+    print(f'Current reading:')
+    print(f'temp: {sensor.temperature()}C')
+    print(f'hum: {sensor.humidity()}%')
 
 
 def matrix_character():

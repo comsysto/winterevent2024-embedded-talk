@@ -15,7 +15,7 @@ def api_status():
 
     led.turn_on()
 
-    status: {} = api.get(url='http://10.100.3.45:8083/actuator/health')
+    status: {} = api.get(url='http://localhost:8080/actuator/health')
     if not status:
         led.blink(count=5, between=0.3)
         exit(1)
