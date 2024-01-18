@@ -22,7 +22,7 @@ class MembraneKeypad3x1:
     _r2: Pin
     _r3: Pin
     _c1: Pin
-    _colours: {}
+    _color: {}
 
     def __init__(self,
                  p1: int = ROW_1_PIN,
@@ -33,20 +33,20 @@ class MembraneKeypad3x1:
         self._r2 = Pin(p2, Pin.OUT)
         self._r3 = Pin(p3, Pin.OUT)
         self._c1 = Pin(c1, Pin.IN)
-        self._colours = {
+        self._color = {
             ROW_1_COLOR: self._r1,
             ROW_2_COLOR: self._r2,
             ROW_3_COLOR: self._r3
         }
 
-    def _read_row(self, colour: str) -> str | None:
-        if colour not in self._colours.keys():
+    def _read_row(self, color: str) -> str | None:
+        if color not in self._color.keys():
             return None
-        row: Pin = self._colours[colour]
+        row: Pin = self._color[color]
         row.value(1)
         clicked = None
         if self._c1.value() == 1:
-            clicked = colour
+            clicked = color
         row.value(0)
         return clicked
 
@@ -59,9 +59,9 @@ class MembraneKeypad3x1:
             if 0 < timeout_ms <= t_elapsed:
                 break
 
-            for colour in self._colours.keys():
-                if self._read_row(colour):
-                    inputs.append(colour)
+            for color in self._color.keys():
+                if self._read_row(color):
+                    inputs.append(color)
 
             sleep(TIME_BETWEEN_READINGS)
 

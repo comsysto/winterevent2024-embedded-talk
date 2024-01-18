@@ -1,6 +1,8 @@
 import json
 
-from src.common.display import Esp8266Display
+from time import sleep
+
+from src.common.display import Esp8266Display, Matrix8x8
 from src.common.input import MembraneKeypad3x1
 from src.common.sensors import DHT22
 from src.examples import service_request
@@ -44,3 +46,33 @@ def temperature_message():
     display.message(f'hum: {sensor.humidity()}%', row=32, reset_before=False, duration_s=1.0)
 
     display.off()
+
+
+def matrix_character():
+    display = Matrix8x8(cs_pin=15)
+    display.brightness(5)
+
+    display.text('a', 0, 0, 1)
+    display.show()
+
+
+def matrix_stars():
+    display = Matrix8x8(cs_pin=15)
+    display.brightness(5)
+
+    display.text('ž', 0, 0, 1)
+    display.show()
+
+
+def matrix_scrolling_message():
+    display = Matrix8x8(cs_pin=15)
+    display.brightness(5)
+
+    display.scrolling_message(message='Hi there :)')
+
+
+def matrix_scrolling_message_color_inversion():
+    display = Matrix8x8(cs_pin=15)
+    display.brightness(5)
+
+    display.scrolling_message(message='Hi there :)', invert_color=True)
