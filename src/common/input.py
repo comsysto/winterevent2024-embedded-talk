@@ -66,3 +66,11 @@ class MembraneKeypad3x1:
             sleep(TIME_BETWEEN_READINGS)
 
         return inputs[:expected_input_count]
+
+class Button:
+    _button: Pin
+
+    def __init__(self, pin: int, callback: function):
+        self._button = Pin(pin, Pin.IN, Pin.PULL_DOWN)
+        self._button.irq(callback, trigger=Pin.IRQ_FALLING)
+    
