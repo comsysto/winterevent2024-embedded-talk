@@ -28,7 +28,7 @@ def api_status():
 
 
 def button_press():
-    button = Button(pin=23, callback=lambda x:print("button pressed"))
+    button = Button(pin=23, callback=lambda x: print("button pressed"))
     wlan = WiFi()
 
     if not wlan.is_connected():

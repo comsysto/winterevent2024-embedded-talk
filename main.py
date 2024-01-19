@@ -12,3 +12,4 @@ from src.examples.mqtt import publisher, subscriber
 # display_message.matrix_scrolling_message_color_inversion()
 # publisher.publish_readings()
 # subscriber.subscribe_on_readings()
+# service_request.button_press()

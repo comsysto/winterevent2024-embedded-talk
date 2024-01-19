@@ -67,10 +67,10 @@ class MembraneKeypad3x1:
 
         return inputs[:expected_input_count]
 
+
 class Button:
     _button: Pin
 
-    def __init__(self, pin: int, callback: function):
+    def __init__(self, pin: int, callback):
         self._button = Pin(pin, Pin.IN, Pin.PULL_DOWN)
         self._button.irq(callback, trigger=Pin.IRQ_FALLING)
-    
